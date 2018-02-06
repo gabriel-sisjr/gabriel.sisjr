@@ -1,4 +1,4 @@
-package projetotc;
+package modelsProjetoTC;
 
 /**
  *
@@ -35,7 +35,6 @@ public class Processador {
     }
     
     void valida() {
-        
         if (palavraAtual.equals("")) {
             if (automato.isFinal(estadoAtual))
                 resultado = true;

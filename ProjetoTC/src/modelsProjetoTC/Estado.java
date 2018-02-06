@@ -1,4 +1,4 @@
-package projetotc;
+package modelsProjetoTC;
 
 /**
  *
@@ -7,6 +7,10 @@ package projetotc;
 public class Estado {
     int id;
     String nome;
+    
+    public Estado(){
+        
+    }
 
     public Estado(int id, String nome) {
         this.id = id;

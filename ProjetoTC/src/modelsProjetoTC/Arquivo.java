@@ -1,4 +1,4 @@
-package projetotc;
+package modelsProjetoTC;
 
 /**
  *
@@ -8,14 +8,14 @@ import java.util.ArrayList;
 
 public class Arquivo {
     
-    Arquivo() {
+    public Arquivo() {
         
     }
     
     static public Automato gerarAutomato1() {
-        ArrayList<Estado> listEstados = new ArrayList<Estado>();
-        ArrayList<Transicao> listTransicoes = new ArrayList<Transicao>();
-        ArrayList<Estado> listEstadoFinal = new ArrayList<Estado>();
+        ArrayList<Estado> listEstados = new ArrayList<>();
+        ArrayList<Transicao> listTransicoes = new ArrayList<>();
+        ArrayList<Estado> listEstadoFinal = new ArrayList<>();
         
         Estado q0 = new Estado(1,"q0");
         Estado q1 = new Estado(2,"q1");
@@ -38,9 +38,9 @@ public class Arquivo {
     }
     
     static public Automato gerarAutomato2() {
-        ArrayList<Estado> listEstados = new ArrayList<Estado>();
-        ArrayList<Transicao> listTransicoes = new ArrayList<Transicao>();
-        ArrayList<Estado> listEstadoFinal = new ArrayList<Estado>();
+        ArrayList<Estado> listEstados = new ArrayList<>();
+        ArrayList<Transicao> listTransicoes = new ArrayList<>();
+        ArrayList<Estado> listEstadoFinal = new ArrayList<>();
         
         Estado q0 = new Estado(1,"q0");
         Estado q1 = new Estado(2,"q1");

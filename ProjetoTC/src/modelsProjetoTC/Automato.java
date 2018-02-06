@@ -1,4 +1,4 @@
-package projetotc;
+package modelsProjetoTC;
 
 /**
  *
@@ -28,6 +28,13 @@ public class Automato {
             if (e.id == estado.id) return true;
         }
         return false;
+    }
+    
+    public void resetar() {
+        //reinicializa o automato criando novos objetos vazios
+        listEstados = new ArrayList<>();
+        estadoInicial = new Estado();
+        listEstadosFinais = new ArrayList<>();
     }
 
 }
