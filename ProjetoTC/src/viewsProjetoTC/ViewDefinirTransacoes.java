@@ -9,12 +9,12 @@ package viewsProjetoTC;
  *
  * @author Gabriel
  */
-public class viewDefinirTransacoes extends javax.swing.JFrame {
+public class ViewDefinirTransacoes extends javax.swing.JFrame {
 
     /**
      * Creates new form viewDefinirTransacoes
      */
-    public viewDefinirTransacoes() {
+    public ViewDefinirTransacoes() {
         initComponents();
         this.setTitle("Digite as passagens dos estados!!");
     }
@@ -154,7 +154,12 @@ public class viewDefinirTransacoes extends javax.swing.JFrame {
     private void removerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removerActionPerformed
 
     }//GEN-LAST:event_removerActionPerformed
-
+    
+    
+    // Metodos Proprios
+    private void addLinha(){
+        
+    }
     /**
      * @param args the command line arguments
      */
@@ -172,20 +177,21 @@ public class viewDefinirTransacoes extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(viewDefinirTransacoes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewDefinirTransacoes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(viewDefinirTransacoes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewDefinirTransacoes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(viewDefinirTransacoes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewDefinirTransacoes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(viewDefinirTransacoes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewDefinirTransacoes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new viewDefinirTransacoes().setVisible(true);
+                new ViewDefinirTransacoes().setVisible(true);
             }
         });
     }

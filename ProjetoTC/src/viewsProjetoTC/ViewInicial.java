@@ -11,27 +11,32 @@ import javax.swing.JOptionPane;
 import modelsProjetoTC.Arquivo;
 import modelsProjetoTC.Automato;
 import modelsProjetoTC.Estado;
+import modelsProjetoTC.Transicao;
 
 /**
  *
  * @author Gabriel
  */
-public class viewInicial extends javax.swing.JFrame {
+public class ViewInicial extends javax.swing.JFrame {
+    
+    // Tela Definicao de estados
+    private static ViewDefinirTransacoes telaTransicoes;
 
     // Variaveis para serem usadas no andamento do programa.
     private static Automato auto;
     private static Arquivo criador;
-    private static viewDefinirTransacoes viewTransacoes;
+    private static ViewDefinirTransacoes viewTransacoes;
     
     // ArrayLists
     private static ArrayList<Estado> listaEstados;
-    private static Estado estadoInicial;
+    private static Estado estado;
     private static ArrayList<Estado> listaEstadoFinal;
+    private static ArrayList<Transicao> listTransicoes;
     
     /**
      * Creates new form viewInicial
      */
-    public viewInicial() {
+    public ViewInicial() {
         initComponents();
         //Não maximiza
         this.setResizable(false);
@@ -166,11 +171,14 @@ public class viewInicial extends javax.swing.JFrame {
         // TODO add your handling code here:
         auto = new Automato();
         criador = new Arquivo();
+        estado = new Estado();
         listaEstados = new ArrayList<>();
         listaEstadoFinal = new ArrayList<>();
         
-        // Array de Strings.
+        // Strings e Arrays.
         String[] listEstados;
+        String[] listEstadosFinais;
+        String estadoInicial;
         
         // Resetando os atributos do automato
         auto.resetar();
@@ -182,8 +190,19 @@ public class viewInicial extends javax.swing.JFrame {
             // Pegando o campo de estados, quebrando e gerando um Array de String com o nome dos Estados.
             listEstados = txtListEstados.getText().split(",");
             for(int i=0; i<listEstados.length; i++){
-                System.out.println(listEstados[i]); 
+                listaEstados.add(new Estado(i, listEstados[i]));
             }
+            
+//            System.out.println("QUANTIDADE LISTA ESTADOS: " + listaEstados.size());
+            // Campo estado Inicial.
+            estadoInicial = txtEstadoInic.getText();
+            
+            // Seguindo a mesma logica do campo dos estados, porém para os estados finais.
+            listEstadosFinais = txtEstadosFins.getText().split(",");
+            for(int i=0; i<listEstadosFinais.length; i++){
+                listaEstadoFinal.add(new Estado(i, listEstadosFinais[i]));
+            }
+//            System.out.println("QUANTIDADE LISTA ESTADOS: " + listaEstadoFinal.size());
         }
     }//GEN-LAST:event_btnDefTransActionPerformed
 
@@ -204,20 +223,21 @@ public class viewInicial extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(viewInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(viewInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(viewInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(viewInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new viewInicial().setVisible(true);
+                new ViewInicial().setVisible(true);
             }
         });
     }

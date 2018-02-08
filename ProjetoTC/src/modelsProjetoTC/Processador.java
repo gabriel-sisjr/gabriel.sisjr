@@ -41,11 +41,14 @@ public class Processador {
             return;
         }
         
+        // É aqui que a porca torse o rabo.
         char charAtual = palavraAtual.charAt(0);
         ArrayList<Estado> listProximosEstados = proximasTransicoes(charAtual);
         
+        // Para cada estado do ArrayList de estados, ele checará o contador para ver se nao entrou em loop.
         for (Estado e : listProximosEstados) {
             if (cont > 50000) return;
+            // A recursividade está aqui
             else new Processador(automato, e ,removeChar(palavraAtual)).valida();
         }
     }
@@ -59,6 +62,7 @@ public class Processador {
         return estados;
     }
     
+    // Apenas uma função auxiliar pra checar a substring.
     public String removeChar(String s) {
         try {
             return palavraAtual.substring(1);
