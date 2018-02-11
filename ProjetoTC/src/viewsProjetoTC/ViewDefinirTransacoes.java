@@ -5,20 +5,47 @@
  */
 package viewsProjetoTC;
 
+import java.util.ArrayList;
+import modelsProjetoTC.Estado;
+import modelsProjetoTC.Transicao;
+
 /**
  *
  * @author Gabriel
  */
 public class ViewDefinirTransacoes extends javax.swing.JFrame {
+    
+    // ArrayLists
+    private static ArrayList<Estado> listaEstados;
+    private static Estado estado;
+    private static ArrayList<Estado> listaEstadoFinal;
+    private static ArrayList<Transicao> listTransicoes;
 
+    
     /**
      * Creates new form viewDefinirTransacoes
+     * @param listEstados
+     * @param estadoInicial
+     * @param listEstadosFinais
      */
-    public ViewDefinirTransacoes() {
+    public ViewDefinirTransacoes(ArrayList<Estado> listEstados, Estado estadoInicial, ArrayList<Estado> listEstadosFinais) {
         initComponents();
-        this.setTitle("Digite as passagens dos estados!!");
+        this.setTitle("Configurando as Transições");
+        this.listaEstados = listEstados;
+        this.estado = estadoInicial;
+        this.listaEstadoFinal = listEstadosFinais;
+        
+        // Realizando a montagem do comboBox ja na inicialização da tela, limpando as opções padroes e adicionando os estados do arrayList
+        atualComboBox.removeAllItems();
+        for(int i=0; i<listaEstados.size(); i++)
+            atualComboBox.addItem(listaEstados.get(i).getNome());
+        
+        proximoComboBox.removeAllItems();
+        for(int i=0; i<listaEstados.size(); i++)
+            proximoComboBox.addItem(listaEstados.get(i).getNome());
     }
 
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -34,10 +61,10 @@ public class ViewDefinirTransacoes extends javax.swing.JFrame {
         continuar = new javax.swing.JButton();
         add = new javax.swing.JButton();
         remover = new javax.swing.JButton();
-        atualBox = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        vaiParaBox = new javax.swing.JComboBox<>();
+        atualComboBox = new javax.swing.JComboBox<>();
+        proximoComboBox = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -86,6 +113,10 @@ public class ViewDefinirTransacoes extends javax.swing.JFrame {
 
         jLabel2.setText("Vai Para");
 
+        atualComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        proximoComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -96,13 +127,13 @@ public class ViewDefinirTransacoes extends javax.swing.JFrame {
                     .addComponent(jScrollPane1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
+                        .addGap(2, 2, 2)
+                        .addComponent(atualComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(atualBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel2)
+                        .addGap(4, 4, 4)
+                        .addComponent(proximoComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(vaiParaBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(add)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(remover)
@@ -120,10 +151,10 @@ public class ViewDefinirTransacoes extends javax.swing.JFrame {
                     .addComponent(continuar)
                     .addComponent(add)
                     .addComponent(remover)
-                    .addComponent(atualBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2)
-                    .addComponent(vaiParaBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(atualComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(proximoComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -144,11 +175,20 @@ public class ViewDefinirTransacoes extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void continuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_continuarActionPerformed
-        
+        System.out.println("\n \n======= Tela das transações =======");
+        System.out.println("====== Lista Estados -> " + listaEstados.size());
+        for (int i = 0; i < listaEstados.size(); i++) {
+            System.out.println(listaEstados.get(i).getNome());
+        }
+        System.out.println("====== Lista Estados Finais -> " + listaEstadoFinal.size());
+        for (int i = 0; i < listaEstadoFinal.size(); i++) {
+            System.out.println(listaEstadoFinal.get(i).getNome());
+        }
+        System.out.println("Estado Inicial: " + estado.getNome());
     }//GEN-LAST:event_continuarActionPerformed
 
     private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed
-
+        
     }//GEN-LAST:event_addActionPerformed
 
     private void removerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removerActionPerformed
@@ -157,7 +197,7 @@ public class ViewDefinirTransacoes extends javax.swing.JFrame {
     
     
     // Metodos Proprios
-    private void addLinha(){
+    private void addLinha(String estadoAtual, String proximoEstado){
         
     }
     /**
@@ -191,21 +231,22 @@ public class ViewDefinirTransacoes extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ViewDefinirTransacoes().setVisible(true);
+//                new ViewDefinirTransacoes().setVisible(true);
+                new ViewDefinirTransacoes(listaEstados, estado, listaEstadoFinal).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton add;
-    private javax.swing.JComboBox<String> atualBox;
+    private javax.swing.JComboBox<String> atualComboBox;
     private javax.swing.JButton continuar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JComboBox<String> proximoComboBox;
     private javax.swing.JButton remover;
-    private javax.swing.JComboBox<String> vaiParaBox;
     // End of variables declaration//GEN-END:variables
 }

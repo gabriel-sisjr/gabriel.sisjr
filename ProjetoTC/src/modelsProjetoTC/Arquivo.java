@@ -57,6 +57,7 @@ public class Arquivo {
         listTransicoes.add(t2);
         listTransicoes.add(t3);
         
+        // Faltando alfabeto para completar a quintupla
         return new Automato(listEstados, listTransicoes, q0, listEstadoFinal);
     }
     
