@@ -12,6 +12,7 @@ public class Automato {
     ArrayList<Transicao> listTransicoes;
     Estado estadoInicial;
     ArrayList<Estado> listEstadosFinais;
+    ArrayList<Character> alfabeto;
     
     public Automato() {
     }
@@ -23,6 +24,7 @@ public class Automato {
         this.listEstadosFinais = listEstadosFinais;
     }
     
+    // Metodo para checar se o estado que se encontra é um estado final.
     public boolean isFinal(Estado estado) {
         for (Estado e : listEstadosFinais) {
             if (e.id == estado.id) return true;

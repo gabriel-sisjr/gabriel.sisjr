@@ -6,6 +6,9 @@
 package viewsProjetoTC;
 
 import java.util.ArrayList;
+import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import modelsProjetoTC.Estado;
 import modelsProjetoTC.Transicao;
 
@@ -20,6 +23,7 @@ public class ViewDefinirTransacoes extends javax.swing.JFrame {
     private static Estado estado;
     private static ArrayList<Estado> listaEstadoFinal;
     private static ArrayList<Transicao> listTransicoes;
+    private static ArrayList<Character> alfabeto;
 
     
     /**
@@ -28,12 +32,16 @@ public class ViewDefinirTransacoes extends javax.swing.JFrame {
      * @param estadoInicial
      * @param listEstadosFinais
      */
-    public ViewDefinirTransacoes(ArrayList<Estado> listEstados, Estado estadoInicial, ArrayList<Estado> listEstadosFinais) {
+    public ViewDefinirTransacoes(ArrayList<Estado> listEstados, Estado estadoInicial, ArrayList<Estado> listEstadosFinais, ArrayList<Character> alfabetoAutomato) {
         initComponents();
         this.setTitle("Configurando as Transições");
+        this.setResizable(false);
+        
+        // Recebendo os arrayLists da tela Inicial
         this.listaEstados = listEstados;
         this.estado = estadoInicial;
         this.listaEstadoFinal = listEstadosFinais;
+        this.alfabeto = alfabetoAutomato;
         
         // Realizando a montagem do comboBox ja na inicialização da tela, limpando as opções padroes e adicionando os estados do arrayList
         atualComboBox.removeAllItems();
@@ -43,8 +51,11 @@ public class ViewDefinirTransacoes extends javax.swing.JFrame {
         proximoComboBox.removeAllItems();
         for(int i=0; i<listaEstados.size(); i++)
             proximoComboBox.addItem(listaEstados.get(i).getNome());
+        
+        consumoComboBox.removeAllItems();
+        for(int i=0; i<alfabeto.size(); i++)
+            consumoComboBox.addItem(alfabeto.get(i).toString());
     }
-
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -65,6 +76,8 @@ public class ViewDefinirTransacoes extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         atualComboBox = new javax.swing.JComboBox<>();
         proximoComboBox = new javax.swing.JComboBox<>();
+        jLabel3 = new javax.swing.JLabel();
+        consumoComboBox = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -73,11 +86,11 @@ public class ViewDefinirTransacoes extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Estado Atual", "Lendo", "Vai Para"
+                "Estado Atual", "Vai Para", "Consumindo"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, true, false
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -117,6 +130,10 @@ public class ViewDefinirTransacoes extends javax.swing.JFrame {
 
         proximoComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
+        jLabel3.setText("Consumo");
+
+        consumoComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -133,6 +150,10 @@ public class ViewDefinirTransacoes extends javax.swing.JFrame {
                         .addComponent(jLabel2)
                         .addGap(4, 4, 4)
                         .addComponent(proximoComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(consumoComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(add)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -154,7 +175,9 @@ public class ViewDefinirTransacoes extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addComponent(jLabel2)
                     .addComponent(atualComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(proximoComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(proximoComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3)
+                    .addComponent(consumoComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -175,31 +198,28 @@ public class ViewDefinirTransacoes extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void continuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_continuarActionPerformed
-        System.out.println("\n \n======= Tela das transações =======");
-        System.out.println("====== Lista Estados -> " + listaEstados.size());
-        for (int i = 0; i < listaEstados.size(); i++) {
-            System.out.println(listaEstados.get(i).getNome());
-        }
-        System.out.println("====== Lista Estados Finais -> " + listaEstadoFinal.size());
-        for (int i = 0; i < listaEstadoFinal.size(); i++) {
-            System.out.println(listaEstadoFinal.get(i).getNome());
-        }
-        System.out.println("Estado Inicial: " + estado.getNome());
+
     }//GEN-LAST:event_continuarActionPerformed
 
     private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed
+//        adicionarLinha();
+        String atual = (String) atualComboBox.getSelectedItem();
+        String destino = (String) proximoComboBox.getSelectedItem();
+        String consumo = (String) consumoComboBox.getSelectedItem();
         
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        String[] rowData = new String[] {atual, destino, consumo};
+        model.addRow(rowData);
     }//GEN-LAST:event_addActionPerformed
 
     private void removerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removerActionPerformed
-
+        if(jTable1.getSelectedRow() != -1){
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            model.removeRow(jTable1.getSelectedRow());
+        } else
+            JOptionPane.showMessageDialog(null, "Selecione uma linha para remover!");
     }//GEN-LAST:event_removerActionPerformed
-    
-    
-    // Metodos Proprios
-    private void addLinha(String estadoAtual, String proximoEstado){
-        
-    }
+
     /**
      * @param args the command line arguments
      */
@@ -232,7 +252,7 @@ public class ViewDefinirTransacoes extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
 //                new ViewDefinirTransacoes().setVisible(true);
-                new ViewDefinirTransacoes(listaEstados, estado, listaEstadoFinal).setVisible(true);
+                new ViewDefinirTransacoes(listaEstados, estado, listaEstadoFinal, alfabeto).setVisible(true);
             }
         });
     }
@@ -240,9 +260,11 @@ public class ViewDefinirTransacoes extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton add;
     private javax.swing.JComboBox<String> atualComboBox;
+    private javax.swing.JComboBox<String> consumoComboBox;
     private javax.swing.JButton continuar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;

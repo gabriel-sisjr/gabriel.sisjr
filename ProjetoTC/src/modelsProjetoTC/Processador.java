@@ -49,6 +49,7 @@ public class Processador {
         for (Estado e : listProximosEstados) {
             if (cont > 50000) return;
             // A recursividade está aqui
+            // Ele retira o char lido e vai pra o proximo.
             else new Processador(automato, e ,removeChar(palavraAtual)).valida();
         }
     }

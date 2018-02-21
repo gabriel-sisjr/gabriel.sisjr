@@ -7,6 +7,7 @@ package viewsProjetoTC;
 
 // Importando todas as classes do pacote Models
 import java.util.ArrayList;
+import java.util.Arrays;
 import javax.swing.JOptionPane;
 import modelsProjetoTC.Arquivo;
 import modelsProjetoTC.Automato;
@@ -31,6 +32,7 @@ public class ViewInicial extends javax.swing.JFrame {
     private static Estado estado;
     private static ArrayList<Estado> listaEstadoFinal;
     private static ArrayList<Transicao> listTransicoes;
+    private static ArrayList<Character> alfabetoAutomato;
     
     /**
      * Creates new form viewInicial
@@ -175,10 +177,13 @@ public class ViewInicial extends javax.swing.JFrame {
         estado = new Estado();
         listaEstados = new ArrayList<>();
         listaEstadoFinal = new ArrayList<>();
+        alfabetoAutomato = new ArrayList<>();
         
         // Strings e Arrays.
         String[] listEstados;
         String[] listEstadosFinais;
+        String alfabetoStr;
+        char[] alfabeto;
         Estado estadoInicial = new Estado();
         
         // Resetando os atributos do automato
@@ -189,43 +194,55 @@ public class ViewInicial extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Preencha os campos vazios!!");
         }else{
             // Pegando o campo de estados, quebrando e gerando um Array de String com o nome dos Estados.
-            System.out.println("======= Tela INICIAL =======");
-            System.out.println("LISTA ESTADOS ARRAY");
+//            System.out.println("======= Tela INICIAL =======");
+//            System.out.println("LISTA ESTADOS ARRAY");
             listEstados = txtListEstados.getText().split(",");
-            for(int i=0; i<listEstados.length; i++){
-                System.out.println(listEstados[i]);
+//            for(int i=0; i<listEstados.length; i++){
+//                System.out.println(listEstados[i]);
 //                listaEstados.add(new Estado(i, listEstados[i]));
 //                System.out.println(listaEstados.get(i).nome);
-            }
-            System.out.println("LISTA ESTADOS ADICIONADOS ARRAYLIST");
+//            }
+//            System.out.println("LISTA ESTADOS ADICIONADOS ARRAYLIST");
             for(int i=0; i<listEstados.length; i++){
 //                System.out.println(listEstados[i]);
                 listaEstados.add(new Estado(i, listEstados[i]));
-                System.out.println(listaEstados.get(i).nome);
+//                System.out.println(listaEstados.get(i).nome);
             }
-            System.out.println("QUANTIDADE LISTA ESTADOS ARRAY: " + listEstados.length);
-            System.out.println("QUANTIDADE LISTA ESTADOS ARRAYLIST: " + listaEstados.size());
-            // Campo estado Inicial.
+//            System.out.println("QUANTIDADE LISTA ESTADOS ARRAY: " + listEstados.length);
+//            System.out.println("QUANTIDADE LISTA ESTADOS ARRAYLIST: " + listaEstados.size());
             
+            // Campo estado Inicial.
             estadoInicial.setNome(txtEstadoInic.getText());
-            System.out.println("LISTA ESTADOS FINAIS ARRAY");
+//            System.out.println("LISTA ESTADOS FINAIS ARRAY");
             // Seguindo a mesma logica do campo dos estados, porém para os estados finais.
             listEstadosFinais = txtEstadosFins.getText().split(",");
             for(int i=0; i<listEstadosFinais.length; i++){
-                System.out.println(listEstadosFinais[i]);
+//                System.out.println(listEstadosFinais[i]);
                 //listaEstadoFinal.add(new Estado(i, listEstadosFinais[i]));
-            }
-            System.out.println("LISTA ESTADOS FINAIS ADICIONADOS ARRAYLIST");
-            for(int i=0; i<listEstadosFinais.length; i++){
+//            }
+//            System.out.println("LISTA ESTADOS FINAIS ADICIONADOS ARRAYLIST");
+//            for(int i=0; i<listEstadosFinais.length; i++){
 //                System.out.println(listEstadosFinais[i]);
                 listaEstadoFinal.add(new Estado(i, listEstadosFinais[i]));
-                System.out.println(listaEstadoFinal.get(i).nome);
+//                System.out.println(listaEstadoFinal.get(i).nome);
             }
-            System.out.println("QUANTIDADE LISTA ESTADOS FINAIS ARRAYLIST: " + listaEstadoFinal.size());
-            System.out.println("QUANTIDADE LISTA ESTADOS FINAIS ARRAY: " + listEstadosFinais.length);
+            
+//            System.out.println("Caracteres do alfabeto do automato");
+            alfabetoStr = txtAlfabetoAutom.getText();
+            
+            for(int i=0; i<alfabetoStr.length(); i+=2){
+                alfabeto = alfabetoStr.toCharArray();
+//                System.out.println("CHAR[] alfabeto -> " + alfabeto[i]);
+//                System.out.println(alfabeto[i]);
+                alfabetoAutomato.add(alfabeto[i]);
+//                System.out.println("Alfabeto no arraylist -> " + alfabetoAutomato.get(i));
+            }
+//            System.out.println("Tamanho ArrayList Alfabeto -> " + alfabetoAutomato.size());
+//            System.out.println("QUANTIDADE LISTA ESTADOS FINAIS ARRAYLIST: " + listaEstadoFinal.size());
+//            System.out.println("QUANTIDADE LISTA ESTADOS FINAIS ARRAY: " + listEstadosFinais.length);
         }
         
-        ViewDefinirTransacoes telaTransacoes = new ViewDefinirTransacoes(listaEstados, estadoInicial, listaEstadoFinal);
+        ViewDefinirTransacoes telaTransacoes = new ViewDefinirTransacoes(listaEstados, estadoInicial, listaEstadoFinal, alfabetoAutomato);
         telaTransacoes.setVisible(true);
     }//GEN-LAST:event_btnDefTransActionPerformed
 
