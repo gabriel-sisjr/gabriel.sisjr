@@ -198,18 +198,19 @@ public class ViewDefinirTransacoes extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void continuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_continuarActionPerformed
-
+            
     }//GEN-LAST:event_continuarActionPerformed
 
     private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed
-//        adicionarLinha();
+        // Pegando os comboBox selecionados
         String atual = (String) atualComboBox.getSelectedItem();
         String destino = (String) proximoComboBox.getSelectedItem();
         String consumo = (String) consumoComboBox.getSelectedItem();
         
+        // Montando a linha utilizando DefaultTableModel para a Jtable.
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        String[] rowData = new String[] {atual, destino, consumo};
-        model.addRow(rowData);
+        String[] linhaDados = new String[] {atual, destino, consumo};
+        model.addRow(linhaDados);
     }//GEN-LAST:event_addActionPerformed
 
     private void removerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removerActionPerformed
