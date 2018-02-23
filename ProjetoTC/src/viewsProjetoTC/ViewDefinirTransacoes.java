@@ -198,7 +198,29 @@ public class ViewDefinirTransacoes extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void continuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_continuarActionPerformed
+        // Inicializando o arrayList de transicoes
+        listTransicoes = new ArrayList<>();
+        // Pegando a quantidade de linhas do Jtable.
+        int qtdLinhasJtable = jTable1.getRowCount();
+//        System.out.println("Quantidade de linhas Jtable -> "+ qtdLinhasJtable);
+        // Pegando as linhas
+        for(int i=0; i<qtdLinhasJtable; i++){
+            // Jtable retorna um Object, necessitando dos Casts.
+            // Metodo para retornar o estado.
+            Estado estadoAtual = Estado.retornaEstado(listaEstados,jTable1.getModel().getValueAt(i, 0).toString());
+            Estado estadoDestino = Estado.retornaEstado(listaEstados,jTable1.getModel().getValueAt(i, 1).toString());
+            // Pegando o primeiro caractere da string.
+            char consumo = ((String) jTable1.getModel().getValueAt(i, 2)).charAt(0);
             
+            // Adicionando a transaçao.
+//            System.out.println("========= Transações ==========");
+//            System.out.println("De -> "+ estadoAtual.getNome() + " Para -> " + estadoDestino.getNome()+ " Consumindo -> " + consumo);
+//            System.out.println();
+            
+            listTransicoes.add(new Transicao(estadoAtual, estadoDestino, consumo));
+//            System.out.println("Tamanho arrayList -> "+ listTransicoes.size());
+        }
+
     }//GEN-LAST:event_continuarActionPerformed
 
     private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed

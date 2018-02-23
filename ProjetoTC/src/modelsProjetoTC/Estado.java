@@ -1,5 +1,7 @@
 package modelsProjetoTC;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Gabriel Santana
@@ -25,4 +27,10 @@ public class Estado {
         this.nome = nome;
     }
     
+    public static Estado retornaEstado(ArrayList<Estado> listaEstados, String nomeEstado){
+        for (Estado e : listaEstados) {
+            if(e.nome.equals(nomeEstado)) return e;
+        }
+        return null;
+    }
 }
