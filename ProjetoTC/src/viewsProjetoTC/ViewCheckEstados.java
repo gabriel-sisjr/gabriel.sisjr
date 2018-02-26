@@ -158,7 +158,9 @@ public class ViewCheckEstados extends javax.swing.JFrame {
         x++;
         }
         
+        // Chamando a tela para definir as transições
         new ViewDefinirTransacoes(listaEstados, estado, listaEstadosFinal, alfabeto).setVisible(true);
+        // Fechando a tela atual.
         this.dispose();
     }//GEN-LAST:event_btnCheckEstadosActionPerformed
 

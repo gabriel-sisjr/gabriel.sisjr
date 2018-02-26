@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class Processador {
     
     static int cont = 0;
-    static boolean resultado = false;
+    public static boolean resultado = false;
     
     Automato automato;
     Estado estadoAtual;
@@ -29,12 +29,12 @@ public class Processador {
         cont++;
     }
     
-    void processaPalavra(){
+    public void processaPalavra(){
         resultado = false;
         valida();
     }
     
-    void valida() {
+    public void valida() {
         if (palavraAtual.equals("")) {
             if (automato.isFinal(estadoAtual))
                 resultado = true;
