@@ -39,6 +39,7 @@ public class Automato {
         estadoInicial = new Estado();
         listEstadosFinais = new ArrayList<>();
         alfabeto = new ArrayList<>();
+        listTransicoes = new ArrayList<>();
     }
 
 }
