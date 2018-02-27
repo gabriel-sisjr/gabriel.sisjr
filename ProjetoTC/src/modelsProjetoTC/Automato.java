@@ -17,11 +17,12 @@ public class Automato {
     public Automato() {
     }
 
-    public Automato(ArrayList<Estado> listEstados, ArrayList<Transicao> listTransicoes, Estado estadoInicial, ArrayList<Estado> listEstadosFinais) {
+    public Automato(ArrayList<Estado> listEstados, ArrayList<Transicao> listTransicoes, Estado estadoInicial, ArrayList<Estado> listEstadosFinais, ArrayList<Character> alfabeto) {
         this.listEstados = listEstados;
         this.listTransicoes = listTransicoes;
         this.estadoInicial = estadoInicial;
         this.listEstadosFinais = listEstadosFinais;
+        this.alfabeto = alfabeto;
     }
     
     // Metodo para checar se o estado que se encontra é um estado final.

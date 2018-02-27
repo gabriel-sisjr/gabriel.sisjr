@@ -151,7 +151,6 @@ public class ViewValidar extends javax.swing.JFrame {
             }else{
                 jTable1.setValueAt(" Palavra Negada", i, 1);
             }
-//            System.out.println("Palavra no indice " + i + " -> " + palavra);
         }
     }//GEN-LAST:event_btnValidarActionPerformed
 

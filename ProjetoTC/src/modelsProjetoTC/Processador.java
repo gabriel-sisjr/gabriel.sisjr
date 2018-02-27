@@ -43,14 +43,22 @@ public class Processador {
         
         // É aqui que a porca torse o rabo.
         char charAtual = palavraAtual.charAt(0);
-        ArrayList<Estado> listProximosEstados = proximasTransicoes(charAtual);
-        
-        // Para cada estado do ArrayList de estados, ele checará o contador para ver se nao entrou em loop.
-        for (Estado e : listProximosEstados) {
-            if (cont > 50000) return;
-            // A recursividade está aqui
-            // Ele retira o char lido e vai pra o proximo.
-            else new Processador(automato, e ,removeChar(palavraAtual)).valida();
+        if(automato.alfabeto.contains(charAtual)){
+            // Só criará uma transição caso o automato contenha o char naquela determinada posição.
+            ArrayList<Estado> listProximosEstados = proximasTransicoes(charAtual);
+            
+            // Para cada estado do ArrayList de estados, ele checará o contador para ver se nao entrou em loop.
+            for (Estado e : listProximosEstados) {
+                if (cont > 50000) return;
+                // A recursividade está aqui
+                // Ele retira o char lido e vai pra o proximo.
+                else new Processador(automato, e ,removeChar(palavraAtual)).valida();
+            }
+        } else {
+            // Caso encontre um caractere que não faz parte do alfabeto determinado, retorna false e nao cria transiçao.
+            // Parando assim a recursividade.
+            resultado = false;
+            return;
         }
     }
     

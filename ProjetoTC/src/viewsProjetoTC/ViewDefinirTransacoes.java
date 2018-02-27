@@ -215,7 +215,7 @@ public class ViewDefinirTransacoes extends javax.swing.JFrame {
             listTransicoes.add(new Transicao(estadoAtual, estadoDestino, consumo));
         }
         // Criando o automato
-        Automato automato = new Automato(listaEstados, listTransicoes, estado, listaEstadoFinal);
+        Automato automato = new Automato(listaEstados, listTransicoes, estado, listaEstadoFinal, alfabeto);
         new ViewValidar(automato).setVisible(true);
         this.dispose();
     }//GEN-LAST:event_continuarActionPerformed
