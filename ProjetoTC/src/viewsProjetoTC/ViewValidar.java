@@ -5,8 +5,11 @@
  */
 package viewsProjetoTC;
 
+import java.io.IOException;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelsProjetoTC.Automato;
+import modelsProjetoTC.GeradorArquivo;
 import modelsProjetoTC.Processador;
 
 /**
@@ -42,6 +45,7 @@ public class ViewValidar extends javax.swing.JFrame {
         btnValidar = new javax.swing.JButton();
         btnAddLinha = new javax.swing.JButton();
         btnNovoAutomato = new javax.swing.JButton();
+        btnSalvarAutomato = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -95,34 +99,43 @@ public class ViewValidar extends javax.swing.JFrame {
             }
         });
 
+        btnSalvarAutomato.setText("Salvar Automato");
+        btnSalvarAutomato.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarAutomatoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnNovoAutomato)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnAddLinha)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnValidar)))
+                .addComponent(btnNovoAutomato)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnSalvarAutomato)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnAddLinha)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnValidar)
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(51, 51, 51)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(6, 6, 6)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnValidar)
                     .addComponent(btnAddLinha)
-                    .addComponent(btnNovoAutomato))
+                    .addComponent(btnNovoAutomato)
+                    .addComponent(btnSalvarAutomato))
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
@@ -159,6 +172,17 @@ public class ViewValidar extends javax.swing.JFrame {
         new ViewRun().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnNovoAutomatoActionPerformed
+
+    private void btnSalvarAutomatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarAutomatoActionPerformed
+        try {
+            // Salvando o automato no arquivo
+            GeradorArquivo.gerarArquivo(automato);
+            System.out.println(automato.getEstadoInicial().getNome());
+            JOptionPane.showMessageDialog(null, "Arquivo Salvo com Sucesso!");
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao salvar o arquivo. Codigo:"+ex);
+        }
+    }//GEN-LAST:event_btnSalvarAutomatoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -198,6 +222,7 @@ public class ViewValidar extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddLinha;
     private javax.swing.JButton btnNovoAutomato;
+    private javax.swing.JButton btnSalvarAutomato;
     private javax.swing.JButton btnValidar;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;

@@ -131,7 +131,7 @@ public class ViewCheckEstados extends javax.swing.JFrame {
         // Inicializando os itens que guadarao as informações.
         listaEstadosFinal = new ArrayList<>();
         estado = new Estado();
-        
+        Estado estadoIni;
         // Pegando o estado Inicial
         if(jTextEstadoIni.getText().equals("")){
             JOptionPane.showMessageDialog(null, "Preencha o campo com o estado inicial!");
@@ -144,7 +144,7 @@ public class ViewCheckEstados extends javax.swing.JFrame {
             }
             else {
                 // Pegando estado Inicial
-                Estado estadoIni = Estado.retornaEstado(listaEstados, jTextEstadoIni.getText());
+                estadoIni = Estado.retornaEstado(listaEstados, jTextEstadoIni.getText());
             }
         }
         
@@ -159,7 +159,7 @@ public class ViewCheckEstados extends javax.swing.JFrame {
         }
         
         // Chamando a tela para definir as transições
-        new ViewDefinirTransacoes(listaEstados, estado, listaEstadosFinal, alfabeto).setVisible(true);
+        new ViewDefinirTransacoes(listaEstados, estadoIni, listaEstadosFinal, alfabeto).setVisible(true);
         // Fechando a tela atual.
         this.dispose();
     }//GEN-LAST:event_btnCheckEstadosActionPerformed

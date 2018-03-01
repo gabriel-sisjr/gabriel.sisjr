@@ -24,6 +24,10 @@ public class Automato {
         this.listEstadosFinais = listEstadosFinais;
         this.alfabeto = alfabeto;
     }
+
+    public Estado getEstadoInicial() {
+        return estadoInicial;
+    }
     
     // Metodo para checar se o estado que se encontra é um estado final.
     public boolean isFinal(Estado estado) {
