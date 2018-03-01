@@ -169,15 +169,18 @@ public class ViewValidar extends javax.swing.JFrame {
 
     private void btnNovoAutomatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoAutomatoActionPerformed
         // Recomeçando todo o processo.
-        new ViewRun().setVisible(true);
-        this.dispose();
+        int escolha = JOptionPane.showConfirmDialog(null, "RESETANDO O AUTOMATO !! \nSalvar o Automato Atual?");
+        switch(escolha){
+            case 0: btnSalvarAutomatoActionPerformed(evt); new ViewRun().setVisible(true); this.dispose(); break;
+            case 1: new ViewRun().setVisible(true); this.dispose(); break;
+            case 2: return;
+        }
     }//GEN-LAST:event_btnNovoAutomatoActionPerformed
 
     private void btnSalvarAutomatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarAutomatoActionPerformed
         try {
             // Salvando o automato no arquivo
             GeradorArquivo.gerarArquivo(automato);
-            System.out.println(automato.getEstadoInicial().getNome());
             JOptionPane.showMessageDialog(null, "Arquivo Salvo com Sucesso!");
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao salvar o arquivo. Codigo:"+ex);
