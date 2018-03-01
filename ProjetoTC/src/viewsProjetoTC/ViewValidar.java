@@ -46,6 +46,7 @@ public class ViewValidar extends javax.swing.JFrame {
         btnAddLinha = new javax.swing.JButton();
         btnNovoAutomato = new javax.swing.JButton();
         btnSalvarAutomato = new javax.swing.JButton();
+        btnLimparCampos = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -78,7 +79,7 @@ public class ViewValidar extends javax.swing.JFrame {
             jTable1.getColumnModel().getColumn(1).setResizable(false);
         }
 
-        btnValidar.setText("Validar");
+        btnValidar.setText("Validar Palavras");
         btnValidar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnValidarActionPerformed(evt);
@@ -106,24 +107,37 @@ public class ViewValidar extends javax.swing.JFrame {
             }
         });
 
+        btnLimparCampos.setText("Limpar Campos");
+        btnLimparCampos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimparCamposActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnNovoAutomato)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnSalvarAutomato)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnAddLinha)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnValidar)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
                 .addGap(51, 51, 51)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnNovoAutomato)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnSalvarAutomato)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnAddLinha)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnLimparCampos)
+                        .addGap(6, 6, 6))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(btnValidar, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -132,11 +146,13 @@ public class ViewValidar extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnValidar)
                     .addComponent(btnAddLinha)
                     .addComponent(btnNovoAutomato)
-                    .addComponent(btnSalvarAutomato))
-                .addContainerGap(16, Short.MAX_VALUE))
+                    .addComponent(btnSalvarAutomato)
+                    .addComponent(btnLimparCampos))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnValidar)
+                .addContainerGap())
         );
 
         pack();
@@ -181,12 +197,26 @@ public class ViewValidar extends javax.swing.JFrame {
         try {
             // Salvando o automato no arquivo
             String nomeArquivo = JOptionPane.showInputDialog("Insira o nome do arquivo:");
+            // Caso o botao de cancelar seja precionado, nada acontece.
+            if(nomeArquivo == null)
+                return;
+            
+            // Caso seja passada a string, irá gerar o arquivo.
             GeradorArquivo.gerarArquivo(automato, nomeArquivo);
             JOptionPane.showMessageDialog(null, "Arquivo Salvo com Sucesso!");
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao salvar o arquivo. Codigo:"+ex);
         }
     }//GEN-LAST:event_btnSalvarAutomatoActionPerformed
+
+    private void btnLimparCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparCamposActionPerformed
+        // Limpar os campos
+        int qntdLinhas = jTable1.getRowCount();
+        for(int i=0; i<qntdLinhas; i++){
+            jTable1.setValueAt("", i, 0);
+            jTable1.setValueAt("", i, 1);
+        }
+    }//GEN-LAST:event_btnLimparCamposActionPerformed
 
     /**
      * @param args the command line arguments
@@ -225,6 +255,7 @@ public class ViewValidar extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddLinha;
+    private javax.swing.JButton btnLimparCampos;
     private javax.swing.JButton btnNovoAutomato;
     private javax.swing.JButton btnSalvarAutomato;
     private javax.swing.JButton btnValidar;

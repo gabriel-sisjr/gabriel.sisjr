@@ -67,6 +67,7 @@ public class Processador {
         for (Transicao t : automato.listTransicoes) {
             if (t.origem.id == estadoAtual.id && t.consumo == c) estados.add(t.destino);
             if (t.origem.id == estadoAtual.id && t.consumo == '$') estados.add(t.destino);
+//            if(t.origem.id == estadoAtual.id && c == '$') estados.add(t.destino);
         }
         return estados;
     }

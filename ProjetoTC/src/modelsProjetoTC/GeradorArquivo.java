@@ -24,20 +24,26 @@ public class GeradorArquivo {
         File arquivo = new File("arquivosExportados/"+nomeArquivo+".jff");
         FileWriter escritor = new FileWriter(arquivo);
         BufferedWriter caneta = new BufferedWriter(escritor);
-        caneta.write("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><!--Created with JFLAP 6.4.--><structure>\n\t<type>fa</type> \n\t<automaton>");
         
-        // Escrevendo o estado inicial
-        caneta.write("\n\t\t<state id=\"" + automato.estadoInicial.getId() + "\" name=\"" + automato.estadoInicial.getNome() + "\">\n\t\t\t<initial/>\n\t\t</state>");
-        
-        // Escrevendo os estados.
+        // Começando o arquivo para ser lido no JFLAP.
+        caneta.write("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><!--Criado no projeto de TC - Gabriel Santana 2018. --><structure>\n\t<type>fa</type> \n\t<automaton>");
+        // Para cada estado
         for(Estado estados : automato.listEstados){
-            // Escrevendo os estados Finais.
-            if(automato.listEstadosFinais.contains(estados)){
+            // Verificando se é estado Inicial e Final ao mesmo tempo.
+            if(estados.getId() == automato.getEstadoInicial().getId() && automato.listEstadosFinais.contains(estados))
+                caneta.write("\n\t\t<state id=\"" + automato.estadoInicial.getId() + "\" name=\"" + automato.estadoInicial.getNome() + "\">\n\t\t\t<initial/>\n\t\t<final/>\n\t\t</state>");
+            // Verificando se é apenas Inicial.
+            else if(!(automato.listEstadosFinais.contains(estados)) && estados.getId() == automato.getEstadoInicial().getId())
+                caneta.write("\n\t\t<state id=\"" + automato.estadoInicial.getId() + "\" name=\"" + automato.estadoInicial.getNome() + "\">\n\t\t\t<initial/>\n\t\t</state>");
+            
+            
+            // Escrevendo os estados Finais que não são estados iniciais.
+            if(automato.listEstadosFinais.contains(estados) && estados.getId() != automato.getEstadoInicial().getId())
                 caneta.write("\n\t\t<state id=\"" + estados.getId() + "\" name=\"" + estados.getNome() + "\"> \n\t\t\t<final/>\n\t\t</state>");
-            }
-            if(automato.listEstados.contains(estados) && !(automato.listEstadosFinais.contains(estados)) && estados.getId() != automato.getEstadoInicial().getId()){
+            
+            // Escrevendo os demais estados.
+            if(automato.listEstados.contains(estados) && !(automato.listEstadosFinais.contains(estados)) && estados.getId() != automato.getEstadoInicial().getId())
                 caneta.write("\n\t\t<state id=\"" + estados.getId() + "\" name=\"" + estados.getNome() + "\"> \n\t\t</state>");
-            }
         }
         
         // Escrevendo as transições
