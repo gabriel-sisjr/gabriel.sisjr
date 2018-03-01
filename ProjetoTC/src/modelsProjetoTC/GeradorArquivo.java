@@ -18,10 +18,10 @@ import java.io.IOException;
 public class GeradorArquivo {
     
     // Metodos para gerar o arquivo
-      public static void gerarArquivo(Automato automato)throws IOException{
+      public static void gerarArquivo(Automato automato, String nomeArquivo)throws IOException{
         
         // Criando o arquivo que será lido pelo JFlap.
-        File arquivo = new File("arquivosExportados/VisualizarEstados.jff");
+        File arquivo = new File("arquivosExportados/"+nomeArquivo+".jff");
         FileWriter escritor = new FileWriter(arquivo);
         BufferedWriter caneta = new BufferedWriter(escritor);
         caneta.write("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><!--Created with JFLAP 6.4.--><structure>\n\t<type>fa</type> \n\t<automaton>");
