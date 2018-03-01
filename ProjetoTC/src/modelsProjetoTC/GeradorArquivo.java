@@ -21,7 +21,7 @@ public class GeradorArquivo {
       public static void gerarArquivo(Automato automato)throws IOException{
         
         // Criando o arquivo que será lido pelo JFlap.
-        File arquivo = new File("VisualizarEstados.jff");
+        File arquivo = new File("arquivosExportados/VisualizarEstados.jff");
         FileWriter escritor = new FileWriter(arquivo);
         BufferedWriter caneta = new BufferedWriter(escritor);
         caneta.write("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><!--Created with JFLAP 6.4.--><structure>\n\t<type>fa</type> \n\t<automaton>");
